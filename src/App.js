@@ -1,9 +1,7 @@
 import * as React from 'react';
-
+import Grid from '@material-ui/core/Grid';
 import { useState, useEffect } from 'react';
-
 import './style.css';
-
 import {
   Typography,
   TextField,
@@ -60,9 +58,19 @@ export default function App() {
   const [inputs, setInputs] = useState({});
 
   function BreedCards() {
+    return (
+    <Grid
+    container
+    spacing={0}
+    direction="column"
+    alignItems="center"
+    justify="center"
+    style={{ minHeight: '100vh' }}
+   >
+
     if (breeds) {
       return (
-        <div>
+        <Grid item xs={3}>
           {breeds.map((breed) => {
             return (
               <Card sx={{ maxWidth: 345, mb: '50px' }}>
@@ -95,9 +103,11 @@ export default function App() {
               </Card>
             );
           })}
-        </div>
+          </Grid>      
       );
     }
+    </Grid>
+    );
   }
 
   const handleChange = (event) => {
@@ -363,6 +373,7 @@ export default function App() {
         </Button>
         <br />
       </form>
+      <br />
       <BreedCards />
     </div>
   );
