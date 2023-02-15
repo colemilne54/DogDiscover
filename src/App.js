@@ -61,39 +61,52 @@ const url =
 
 export default function App() {
   const [breeds, getBreeds] = useState([]);
+  const [inputs, setInputs] = useState({});
 
-  function handleSubmit(e) {
-    // Prevent the browser from reloading the page
-    e.preventDefault();
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
 
-    // Read the form data
-    const form = e.target;
-    const formData = new FormData(form);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(inputs);
+    alert(inputs);
+  };
 
-    // You can pass formData as a fetch body directly:
-    fetch('/some-api', { method: form.method, body: formData });
+  // function handleSubmit(e) {
+  //   // Prevent the browser from reloading the page
+  //   e.preventDefault();
 
-    // Or you can work with it as a plain object:
-    const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
-  }
+  //   // Read the form data
+  //   const form = e.target;
+  //   const formData = new FormData(form);
 
-  useEffect(() => {
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        // 'X-Api-Key': 'Qrj+hE8c3dEAUqXdL3ISUQ==56KpptbJlFkbqWt3',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        getBreeds(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  //   // You can pass formData as a fetch body directly:
+  //   // fetch('/some-api', { method: form.method, body: formData });
+
+  //   // Or you can work with it as a plain object:
+  //   const formJson = Object.fromEntries(formData.entries());
+  //   console.log(JSON.stringify(formJson));
+  // }
+
+  // useEffect(() => {
+  //   fetch(url, {
+  //     method: 'GET',
+  //     headers: {
+  //       // 'X-Api-Key': 'Qrj+hE8c3dEAUqXdL3ISUQ==56KpptbJlFkbqWt3',
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       getBreeds(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
 
   // return (
   //   <div>
@@ -135,14 +148,17 @@ export default function App() {
   return (
     <div className="App">
       <Typography variant="h5">Dog Breed Finder</Typography>
-      <form onSubmit={handleSubmit}>
+      <FormControl onSubmit={handleSubmit}>
         <TextField
           style={{ width: '200px', margin: '5px' }}
-          type="text"
-          label="Minimum Height"
           variant="outlined"
+          label="Minimum Height"
+          name="min_height"
+          type="text"
+          value={inputs.min_height}
+          onChange={handleChange}
         />
-        <br />
+        {/* <br />
         <TextField
           style={{ width: '200px', margin: '5px' }}
           type="text"
@@ -232,11 +248,11 @@ export default function App() {
           min={-1}
           max={5}
         />
-        <br />
-        <Button variant="contained" color="primary">
+        <br /> */}
+        <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
-      </form>
+      </FormControl>
     </div>
   );
 }
