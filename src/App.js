@@ -59,6 +59,47 @@ export default function App() {
   const [breeds, getBreeds] = useState([]);
   const [inputs, setInputs] = useState({});
 
+  function BreedCards() {
+    if (breeds) {
+      return (
+        <div>
+          {breeds.map((breed) => {
+            return (
+              <Card sx={{ maxWidth: 345, mb: '50px' }}>
+                <CardMedia sx={{ height: 250 }} image={breed.image_link} />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {breed.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Male Height Range: {breed.min_height_male}-
+                    {breed.max_height_male}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Female Height Range: {breed.min_height_female}-
+                    {breed.max_height_female}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Male Weight Range: {breed.min_weight_male}-
+                    {breed.max_weight_male}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Female Weight Range: {breed.min_weight_female}-
+                    {breed.max_weight_female}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Life Expectancy: {breed.min_life_expectancy}-
+                    {breed.max_life_expectancy}
+                  </Typography>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      );
+    }
+  }
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -77,32 +118,31 @@ export default function App() {
           url += '&';
         }
         console.log(url);
-        count += 1;
       }
+      count += 1;
     }
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'X-Api-Key': 'Qrj+hE8c3dEAUqXdL3ISUQ==56KpptbJlFkbqWt3',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        getBreeds(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
-
-  // function handleSubmit(e) {
-  //   // Prevent the browser from reloading the page
-  //   e.preventDefault();
-
-  //   // Read the form data
-  //   const form = e.target;
-  //   const formData = new FormData(form);
-
-  //   // You can pass formData as a fetch body directly:
-  //   // fetch('/some-api', { method: form.method, body: formData });
-
-  //   // Or you can work with it as a plain object:
-  //   const formJson = Object.fromEntries(formData.entries());
-  //   console.log(JSON.stringify(formJson));
-  // }
 
   // useEffect(() => {
   //   fetch(url, {
   //     method: 'GET',
   //     headers: {
-  //       // 'X-Api-Key': 'Qrj+hE8c3dEAUqXdL3ISUQ==56KpptbJlFkbqWt3',
+  //       'X-Api-Key': 'Qrj+hE8c3dEAUqXdL3ISUQ==56KpptbJlFkbqWt3',
   //     },
   //   })
   //     .then((response) => response.json())
@@ -156,7 +196,7 @@ export default function App() {
     <div className="App">
       <Typography variant="h5">Dog Breed Finder</Typography>
       <form onSubmit={handleSubmit}>
-        <TextField
+        {/* <TextField
           style={{ width: '200px', margin: '5px' }}
           variant="outlined"
           label="Minimum Height"
@@ -203,6 +243,118 @@ export default function App() {
           label="Maximum Life Expectancy"
           variant="outlined"
         />
+        <br /> */}
+        <Typography gutterBottom>Barking</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Barking"
+          name="barking"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          value={inputs.barking}
+          onChange={handleChange}
+        />
+        <br />
+        <Typography gutterBottom>Protectiveness</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Protectiveness"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          name="protectiveness"
+          value={inputs.protectiveness}
+          onChange={handleChange}
+        />
+        <br />
+        <Typography gutterBottom>Trainability</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Trainability"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          name="trainability"
+          value={inputs.trainability}
+          onChange={handleChange}
+        />
+        <br />
+        <Typography gutterBottom>Playfulness</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Playfulness"
+          name="playfulness"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          value={inputs.playfulness}
+          onChange={handleChange}
+        />
+        <br />
+        <Typography gutterBottom>Energy</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Energy"
+          name="energy"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          value={inputs.energy}
+          onChange={handleChange}
+        />
+        <br />
+        <Typography gutterBottom>Drooling</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Drooling"
+          name="drooling"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          value={inputs.drooling}
+          onChange={handleChange}
+        />
+        <br />
+        <Typography gutterBottom>Coat Length</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Coat Length"
+          name="coat_length"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          value={inputs.coat_length}
+          onChange={handleChange}
+        />
+        <br />
+        <Typography gutterBottom>Grooming</Typography>
+        <Slider
+          style={{ width: '200px' }}
+          aria-label="Grooming"
+          name="grooming"
+          defaultValue={-1}
+          step={null}
+          marks={marks}
+          min={-1}
+          max={5}
+          value={inputs.grooming}
+          onChange={handleChange}
+        />
         <br />
         <Typography gutterBottom>Shedding</Typography>
         <Slider
@@ -218,57 +370,54 @@ export default function App() {
           onChange={handleChange}
         />
         <br />
-        <Typography gutterBottom>Barking</Typography>
+        <Typography gutterBottom>Good With Children</Typography>
         <Slider
           style={{ width: '200px' }}
-          aria-label="Barking"
-          name="barking"
+          aria-label="Good with children"
+          name="good_with_children"
           defaultValue={-1}
           step={null}
           marks={marks}
           min={-1}
           max={5}
-          value={inputs.barking}
+          value={inputs.good_with_children}
           onChange={handleChange}
         />
         <br />
-        <Typography gutterBottom>Energy</Typography>
+        <Typography gutterBottom>Good With Other Dogs</Typography>
         <Slider
           style={{ width: '200px' }}
-          aria-label="Energy"
+          aria-label="Good with other dogs"
+          name="good_with_other_dogs"
           defaultValue={-1}
           step={null}
           marks={marks}
           min={-1}
           max={5}
+          value={inputs.good_with_other_dogs}
+          onChange={handleChange}
         />
         <br />
-        <Typography gutterBottom>Protectiveness</Typography>
+        <Typography gutterBottom>Good With Strangers</Typography>
         <Slider
           style={{ width: '200px' }}
-          aria-label="Temperature"
+          aria-label="Good with strangers"
+          name="good_with_strangers"
           defaultValue={-1}
           step={null}
           marks={marks}
           min={-1}
           max={5}
-        />
-        <br />
-        <Typography gutterBottom>Trainability</Typography>
-        <Slider
-          style={{ width: '200px' }}
-          aria-label="Temperature"
-          defaultValue={-1}
-          step={null}
-          marks={marks}
-          min={-1}
-          max={5}
+          value={inputs.good_with_strangers}
+          onChange={handleChange}
         />
         <br />
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
+        <br />
       </form>
+      <BreedCards />
     </div>
   );
 }
