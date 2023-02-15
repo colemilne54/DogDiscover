@@ -44,11 +44,6 @@ const marks = [
   },
 ];
 
-// var name = 'golden retriever';
-// const url = 'https://api.api-ninjas.com/v1/dogs?name=' + name;
-
-var protectiveness = 5;
-var trainability = 5;
 var url = 'https://api.api-ninjas.com/v1/dogs?';
 
 // https://portal.thatapicompany.com/pages/dog-api or https://api-ninjas.com/api/dogs
@@ -58,7 +53,7 @@ export default function App() {
   const [inputs, setInputs] = useState({});
 
   function BreedCards() {
-    if (breeds) {
+    if (breeds.length > 0) {
       return (
         <div>
           {breeds.map((breed) => {
@@ -70,24 +65,24 @@ export default function App() {
                     {breed.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Male Height Range: {breed.min_height_male}-
-                    {breed.max_height_male}
+                    Male Height Range: {breed.min_height_male} -{' '}
+                    {breed.max_height_male} inches
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Female Height Range: {breed.min_height_female}-
-                    {breed.max_height_female}
+                    Female Height Range: {breed.min_height_female} -{' '}
+                    {breed.max_height_female} inches
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Male Weight Range: {breed.min_weight_male}-
-                    {breed.max_weight_male}
+                    Male Weight Range: {breed.min_weight_male} -{' '}
+                    {breed.max_weight_male} lbs
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Female Weight Range: {breed.min_weight_female}-
-                    {breed.max_weight_female}
+                    Female Weight Range: {breed.min_weight_female} -{' '}
+                    {breed.max_weight_female} lbs
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Life Expectancy: {breed.min_life_expectancy}-
-                    {breed.max_life_expectancy}
+                    Life Expectancy: {breed.min_life_expectancy} -{' '}
+                    {breed.max_life_expectancy} years
                   </Typography>
                 </CardContent>
               </Card>
@@ -104,10 +99,16 @@ export default function App() {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
+  const handleReset = (event) => {
+    event.preventDefault();
+    event.target.reset();
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
     var count = 1;
+    url = 'https://api.api-ninjas.com/v1/dogs?';
 
     for (let name in inputs) {
       if (inputs[name] > -1) {
@@ -147,7 +148,7 @@ export default function App() {
       style={{ minHeight: '100vh' }}
     >
       <Typography variant="h5">Dog Breed Finder</Typography>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
         <br />
         {/* <TextField
           style={{ width: '200px', margin: '5px' }}
@@ -365,8 +366,22 @@ export default function App() {
           onChange={handleChange}
         />
         <br />
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          style={{ marginTop: 15 }}
+        >
           Submit
+        </Button>
+        <br />
+        <Button
+          type="reset"
+          variant="contained"
+          color="primary"
+          style={{ marginTop: 15 }}
+        >
+          Reset
         </Button>
         <br />
       </form>
