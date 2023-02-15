@@ -51,11 +51,7 @@ const marks = [
 
 var protectiveness = 5;
 var trainability = 5;
-const url =
-  'https://api.api-ninjas.com/v1/dogs?protectiveness=' +
-  protectiveness +
-  '&trainability=' +
-  trainability;
+var url = 'https://api.api-ninjas.com/v1/dogs?';
 
 // https://portal.thatapicompany.com/pages/dog-api or https://api-ninjas.com/api/dogs
 
@@ -72,6 +68,18 @@ export default function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
+    var count = 1;
+
+    for (let name in inputs) {
+      if (inputs[name] > -1) {
+        url = url + name + '=' + inputs[name];
+        if (count != Object.keys(inputs).length) {
+          url += '&';
+        }
+        console.log(url);
+        count += 1;
+      }
+    }
   };
 
   // function handleSubmit(e) {
@@ -206,7 +214,7 @@ export default function App() {
           marks={marks}
           min={-1}
           max={5}
-          value={inputs.shedding || ''}
+          value={inputs.shedding}
           onChange={handleChange}
         />
         <br />
@@ -214,11 +222,14 @@ export default function App() {
         <Slider
           style={{ width: '200px' }}
           aria-label="Barking"
+          name="barking"
           defaultValue={-1}
           step={null}
           marks={marks}
           min={-1}
           max={5}
+          value={inputs.barking}
+          onChange={handleChange}
         />
         <br />
         <Typography gutterBottom>Energy</Typography>
