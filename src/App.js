@@ -138,60 +138,6 @@ export default function App() {
       });
   };
 
-  // useEffect(() => {
-  //   fetch(url, {
-  //     method: 'GET',
-  //     headers: {
-  //       'X-Api-Key': 'Qrj+hE8c3dEAUqXdL3ISUQ==56KpptbJlFkbqWt3',
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       getBreeds(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
-
-  // return (
-  //   <div>
-  //     {breeds.map((breed) => {
-  //       return (
-  //         <Card sx={{ maxWidth: 345, mb: '50px' }}>
-  //           <CardMedia sx={{ height: 250 }} image={breed.image_link} />
-  //           <CardContent>
-  //             <Typography gutterBottom variant="h5" component="div">
-  //               {breed.name}
-  //             </Typography>
-  //             <Typography variant="body2" color="text.secondary">
-  //               Male Height Range: {breed.min_height_male}-
-  //               {breed.max_height_male}
-  //             </Typography>
-  //             <Typography variant="body2" color="text.secondary">
-  //               Female Height Range: {breed.min_height_female}-
-  //               {breed.max_height_female}
-  //             </Typography>
-  //             <Typography variant="body2" color="text.secondary">
-  //               Male Weight Range: {breed.min_weight_male}-
-  //               {breed.max_weight_male}
-  //             </Typography>
-  //             <Typography variant="body2" color="text.secondary">
-  //               Female Weight Range: {breed.min_weight_female}-
-  //               {breed.max_weight_female}
-  //             </Typography>
-  //             <Typography variant="body2" color="text.secondary">
-  //               Life Expectancy: {breed.min_life_expectancy}-
-  //               {breed.max_life_expectancy}
-  //             </Typography>
-  //           </CardContent>
-  //         </Card>
-  //       );
-  //     })}
-  //   </div>
-  // );
-
   return (
     <div className="App">
       <Typography variant="h5">Dog Breed Finder</Typography>
