@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Grid from '@material-ui/core/Grid';
 import { useState, useEffect } from 'react';
 import './style.css';
 import {
@@ -58,19 +57,9 @@ export default function App() {
   const [inputs, setInputs] = useState({});
 
   function BreedCards() {
-    return (
-    <Grid
-    container
-    spacing={0}
-    direction="column"
-    alignItems="center"
-    justify="center"
-    style={{ minHeight: '100vh' }}
-   >
-
     if (breeds) {
       return (
-        <Grid item xs={3}>
+        <div>
           {breeds.map((breed) => {
             return (
               <Card sx={{ maxWidth: 345, mb: '50px' }}>
@@ -103,11 +92,9 @@ export default function App() {
               </Card>
             );
           })}
-          </Grid>      
+        </div>
       );
     }
-    </Grid>
-    );
   }
 
   const handleChange = (event) => {
