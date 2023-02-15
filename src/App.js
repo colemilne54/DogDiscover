@@ -72,7 +72,6 @@ export default function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
-    alert(inputs);
   };
 
   // function handleSubmit(e) {
@@ -148,7 +147,7 @@ export default function App() {
   return (
     <div className="App">
       <Typography variant="h5">Dog Breed Finder</Typography>
-      <FormControl onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <TextField
           style={{ width: '200px', margin: '5px' }}
           variant="outlined"
@@ -158,12 +157,15 @@ export default function App() {
           value={inputs.min_height}
           onChange={handleChange}
         />
-        {/* <br />
+        <br />
         <TextField
           style={{ width: '200px', margin: '5px' }}
           type="text"
           label="Maximum Height"
           variant="outlined"
+          name="max_height"
+          value={inputs.max_height}
+          onChange={handleChange}
         />
         <br />
         <TextField
@@ -197,18 +199,21 @@ export default function App() {
         <Typography gutterBottom>Shedding</Typography>
         <Slider
           style={{ width: '200px' }}
-          aria-label="Temperature"
+          aria-label="Shedding"
+          name="shedding"
           defaultValue={-1}
           step={null}
           marks={marks}
           min={-1}
           max={5}
+          value={inputs.shedding || ''}
+          onChange={handleChange}
         />
         <br />
         <Typography gutterBottom>Barking</Typography>
         <Slider
           style={{ width: '200px' }}
-          aria-label="Temperature"
+          aria-label="Barking"
           defaultValue={-1}
           step={null}
           marks={marks}
@@ -219,7 +224,7 @@ export default function App() {
         <Typography gutterBottom>Energy</Typography>
         <Slider
           style={{ width: '200px' }}
-          aria-label="Temperature"
+          aria-label="Energy"
           defaultValue={-1}
           step={null}
           marks={marks}
@@ -248,11 +253,11 @@ export default function App() {
           min={-1}
           max={5}
         />
-        <br /> */}
+        <br />
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
-      </FormControl>
+      </form>
     </div>
   );
 }
