@@ -10,6 +10,7 @@ import {
   Card,
   CardMedia,
   CardContent,
+  Grid,
 } from '@mui/material';
 
 const marks = [
@@ -136,9 +137,18 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      textAlign="center"
+      style={{ minHeight: '100vh' }}
+    >
       <Typography variant="h5">Dog Breed Finder</Typography>
       <form onSubmit={handleSubmit}>
+        <br />
         {/* <TextField
           style={{ width: '200px', margin: '5px' }}
           variant="outlined"
@@ -362,6 +372,6 @@ export default function App() {
       </form>
       <br />
       <BreedCards />
-    </div>
+    </Grid>
   );
 }
