@@ -99,11 +99,6 @@ export default function App() {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleReset = (event) => {
-    event.preventDefault();
-    event.target.reset();
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
@@ -148,7 +143,7 @@ export default function App() {
       style={{ minHeight: '100vh' }}
     >
       <Typography variant="h5">Dog Breed Finder</Typography>
-      <form onSubmit={handleSubmit} onReset={handleReset}>
+      <form onSubmit={handleSubmit}>
         <br />
         {/* <TextField
           style={{ width: '200px', margin: '5px' }}
@@ -373,15 +368,6 @@ export default function App() {
           style={{ marginTop: 15 }}
         >
           Submit
-        </Button>
-        <br />
-        <Button
-          type="reset"
-          variant="contained"
-          color="primary"
-          style={{ marginTop: 15 }}
-        >
-          Reset
         </Button>
         <br />
       </form>
