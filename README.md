@@ -1,4 +1,4 @@
-# DogDiscoverer
+# DogDiscover
 ## A web app to find your next dog breed
 
 Introducing our web application, designed to help you find the perfect dog breed that fits your specific criteria. With just a few clicks, you can discover which dog breeds are most compatible with your lifestyle, personality, and living situation.
