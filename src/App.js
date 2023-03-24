@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import './style.css';
 import {
   Typography,
@@ -49,8 +50,9 @@ var url = 'https://api.api-ninjas.com/v1/dogs?';
 // https://portal.thatapicompany.com/pages/dog-api or https://api-ninjas.com/api/dogs
 
 export default function App() {
-  const [breeds, getBreeds] = useState([]);
+  const [breeds, getBreeds] = useState(null);
   const [inputs, setInputs] = useState({});
+  const { reset } = useForm();
 
   function BreedCards() {
     if (breeds.length > 0) {
@@ -90,6 +92,12 @@ export default function App() {
           })}
         </div>
       );
+    } else {
+      return (
+        <Typography variant="h5" component="p">
+          No dog breeds found matching criteria
+        </Typography>
+      );
     }
   }
 
@@ -97,6 +105,15 @@ export default function App() {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleReset = (event) => {
+    console.log('test');
+    const name = event.target.name;
+    console.log(name);
+    const defaultValue = event.target.defaultValue;
+    console.log(defaultValue);
+    setInputs((defaultValues) => ({ ...defaultValues, [name]: defaultValue }));
   };
 
   const handleSubmit = (event) => {
@@ -145,54 +162,6 @@ export default function App() {
       <Typography variant="h5">Dog Breed Finder</Typography>
       <form onSubmit={handleSubmit}>
         <br />
-        {/* <TextField
-          style={{ width: '200px', margin: '5px' }}
-          variant="outlined"
-          label="Minimum Height"
-          name="min_height"
-          type="text"
-          value={inputs.min_height}
-          onChange={handleChange}
-        />
-        <br />
-        <TextField
-          style={{ width: '200px', margin: '5px' }}
-          type="text"
-          label="Maximum Height"
-          variant="outlined"
-          name="max_height"
-          value={inputs.max_height}
-          onChange={handleChange}
-        />
-        <br />
-        <TextField
-          style={{ width: '200px', margin: '5px' }}
-          type="text"
-          label="Minimum Weight"
-          variant="outlined"
-        />
-        <br />
-        <TextField
-          style={{ width: '200px', margin: '5px' }}
-          type="text"
-          label="Maximum Weight"
-          variant="outlined"
-        />
-        <br />
-        <TextField
-          style={{ width: '200px', margin: '5px' }}
-          type="text"
-          label="Minimum Life Expectancy"
-          variant="outlined"
-        />
-        <br />
-        <TextField
-          style={{ width: '200px', margin: '5px' }}
-          type="number"
-          label="Maximum Life Expectancy"
-          variant="outlined"
-        />
-        <br /> */}
         <Typography gutterBottom>Barking</Typography>
         <Slider
           style={{ width: '200px' }}
@@ -370,9 +339,17 @@ export default function App() {
           Submit
         </Button>
         <br />
+        <Button
+          onClick={() => reset()}
+          variant="contained"
+          style={{ marginTop: 15, backgroundColor: 'grey' }}
+        >
+          Reset
+        </Button>
+        <br />
       </form>
       <br />
-      <BreedCards />
+      {breeds !== null && <BreedCards />}
     </Grid>
   );
 }
